@@ -76,7 +76,7 @@ const initialNodes: Node[] = [
     id: 'node-2',
     type: 'custom',
     position: { x: 250, y: 200 },
-    data: { label: 'Assign User', subtitle: 'Assign Chelsea Tang → Lead Owner', color: 'blue', type: 'action' },
+    data: { label: 'Assign User', subtitle: 'Assign Avinash → Lead Owner', color: 'blue', type: 'action' },
   },
   {
     id: 'node-3',

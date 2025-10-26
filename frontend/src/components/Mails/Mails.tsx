@@ -5,10 +5,10 @@ import { Plus, Mail } from 'lucide-react';
 export default function Mails() {
   const mails = [
     { id: 1, subject: 'Welcome to AI Scrapper', sender: 'team@aiscrapper.com', time: '2h ago' },
-    { id: 2, subject: 'Project Update', sender: 'manager@company.com', time: '5h ago' },
-    { id: 3, subject: 'New Workflow Assigned', sender: 'workflow@aiscrapper.com', time: '1d ago' },
-    { id: 4, subject: 'Reminder: Meeting', sender: 'hr@company.com', time: '2d ago' },
-    { id: 5, subject: 'Newsletter October', sender: 'newsletter@company.com', time: '3d ago' },
+    { id: 2, subject: 'Project Update', sender: 'manager@willowave.com', time: '5h ago' },
+    { id: 3, subject: 'New Workflow Assigned', sender: 'workflow@willowave.com', time: '1d ago' },
+    { id: 4, subject: 'Reminder: Meeting', sender: 'hr@willlowave.com', time: '2d ago' },
+    { id: 5, subject: 'Newsletter October', sender: 'newsletter@willowave.com', time: '3d ago' },
   ];
 
   return (

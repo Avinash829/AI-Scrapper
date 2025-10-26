@@ -3,7 +3,6 @@
 import { Plus } from 'lucide-react';
 
 export default function Projects() {
-  // Dummy list of projects
   const projects = [
     { id: 1, name: 'Website Redesign' },
     { id: 2, name: 'Marketing Campaign' },

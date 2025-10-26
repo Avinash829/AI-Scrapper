@@ -7,7 +7,7 @@ interface HeaderProps {
   userName?: string;
 }
 
-export default function Header({ activeTab, userName = 'John Doe' }: HeaderProps) {
+export default function Header({ activeTab, userName = 'Avinash' }: HeaderProps) {
   return (
     <div className="w-[78vw] h-[60px] bg-white rounded-2xl shadow-md flex items-center justify-between px-6 mt-6 ml-6">
       {/* Left: Active Tab */}

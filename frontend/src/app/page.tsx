@@ -13,7 +13,7 @@ import Mails from '@/components/Mails/Mails';
 import Header from '@/components/Header';
 
 export default function Page() {
-  const [activeTab, setActiveTab] = useState('home'); // default to 'home'
+  const [activeTab, setActiveTab] = useState('home'); 
   const [selectedNode, setSelectedNode] = useState<Node | null>(null);
 
   return (
@@ -25,7 +25,7 @@ export default function Page() {
 
     <div className="flex-1 flex flex-col overflow-hidden relative">
         {/* Common Header */}
-        <Header activeTab={activeTab} userName="Chelsea Tang" />
+        <Header activeTab={activeTab} userName="Avinash" />
 
         {/* Content area */}
         <div className="flex-1 flex overflow-hidden mt-4">
