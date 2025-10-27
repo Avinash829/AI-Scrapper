@@ -3,3 +3,8 @@
 button:hover{
     cursor: pointer;
 }
+
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+

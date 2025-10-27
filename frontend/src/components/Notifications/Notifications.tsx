@@ -12,7 +12,7 @@ export default function Notifications() {
   ];
 
   return (
-    <div className="w-[75vw] flex-1 bg-white rounded-4xl shadow-sm border border-gray-200 ml-6 mt-6 mr-6 p-6 flex flex-col">
+    <div className="h-[80vh] w-[75vw] flex-1 bg-white rounded-4xl shadow-sm border border-gray-200 ml-6 mr-6 mt-6 p-6 flex flex-col">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <h2 className="text-xl font-semibold text-gray-900 flex items-center gap-2">
