@@ -14,7 +14,18 @@ export default function ConfigPanel() {
     const dropdownRef = useRef<HTMLDivElement>(null);
 
     const platforms = [
-        { name: 'LinkedIn', icon: <FaLinkedin className="text-blue-600 text-lg" /> },
+        {
+            name: 'LinkedIn',
+            icon: (
+                <Image
+                    src="/linkedin.svg"
+                    alt="LinkedIn Icon"
+                    width={20}
+                    height={20}
+                    className="text-blue-600"
+                />
+            ),
+        },
         { name: 'Twitter', icon: <FaTwitter className="text-sky-500 text-lg" /> },
         { name: 'Facebook', icon: <FaFacebook className="text-blue-500 text-lg" /> },
         { name: 'Instagram', icon: <FaInstagram className="text-pink-500 text-lg" /> },
@@ -76,7 +87,15 @@ export default function ConfigPanel() {
 
 
                         {/* AI Sparkles Icon (bottom-right) */}
-                        <SparklesIcon className="absolute right-3 bottom-3 w-5 h-5 text-blue-500 pointer-events-none" />
+                        {/* <SparklesIcon className="absolute right-3 bottom-3 w-5 h-5 text-blue-500 pointer-events-none" /> */}
+                        <Image
+                            src="/promptai.svg"   
+                            alt="prompt ai icon"
+                            width={12}
+                            height={12}
+                            className="absolute right-3 bottom-3 w-4 h-4 text-blue-500 pointer-events-none"
+                        />
+
                     </div>
                 </div>
 
@@ -158,7 +177,7 @@ export default function ConfigPanel() {
 
             {/* Start Button */}
             <div className="p-6 shrink-0">
-                <button className="w-full flex items-center justify-center gap-2 bg-indigo-400 hover:bg-blue-700 text-gray-200 font-medium py-2 rounded-lg transition-all shadow-sm text-sm">
+                <button className="w-full flex items-center justify-center gap-2 bg-[#6676FF] hover:bg-blue-700 text-gray-200 font-medium py-2 rounded-lg transition-all shadow-sm text-sm">
                     <FiCopy size={16} className="text-white" />
                     <span>Start Scraping</span>
                 </button>

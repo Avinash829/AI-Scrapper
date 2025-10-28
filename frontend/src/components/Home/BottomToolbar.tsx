@@ -1,33 +1,105 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 'use client';
-import { Workflow, Table, Sparkles } from 'lucide-react';
+import { Workflow, Sparkles } from 'lucide-react';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 export default function BottomToolbar() {
-  return (
-    <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-white rounded-full shadow-lg border border-gray-200 px-2 py-1 flex items-center gap-1">
-      <button
-    className="flex items-center gap-2 px-4 py-2 rounded-full text-sm text-gray-600 bg-gray-100 hover:bg-blue-100 transition-colors">
-            <Workflow size={18} />
+    const [mounted, setMounted] = useState(false);
 
-    <span className="font-medium text--gray-700">Workflow</span>
-</button>
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
-      {/* <div className="w-px h-6 bg-gray-200"></div> */}
-      <button className="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-gray-200 transition-colors text-gray-700 text-sm">
-        <Image
-            src="/sheet.svg"
-            alt="Sheets Icon"
-            width={18}
-            height={18}
-        />
-        <span className="font-medium text-gray-400">Sheet</span>
-    </button>
+    if (!mounted) return null; 
+    return (
+        <div
+            className="
+                fixed
+                top-[90vh]
+                left-[545px]
+                w-[330px]
+                h-[50px]
+                flex
+                items-center
+                justify-between
+                gap-[5px]
+                bg-white
+                border
+                border-gray-200
+                rounded-[100px]
+                px-[10px]
+                py-[8px]
+                opacity-100
+                shadow-lg
+            "
+        >
+            <button
+                className="
+                    flex
+                    items-center
+                    gap-2
+                    px-4
+                    py-2
+                    rounded-full
+                    text-xs
+                    text-gray-600
+                    bg-gray-100
+                    hover:bg-blue-100
+                    transition-colors
+                "
+            >
+                <Workflow size={18} />
+                <span className="text-xs text-gray-700">Workflow</span>
+            </button>
 
-      {/* <div className="w-px h-6 bg-gray-200"></div> */}
-      <button className="flex items-center gap-2 px-4 py-2 rounded-full hover:bg-gray-200 transition-colors text-indigo-400 text-sm">
-        <Sparkles size={18} />
-        <span className="font-medium">Ask AI</span>
-      </button>
-    </div>
-  );
+            <button
+                className="
+                    flex
+                    items-center
+                    gap-2
+                    px-4
+                    py-2
+                    rounded-full
+                    hover:bg-gray-200
+                    transition-colors
+                    text-gray-700
+                    text-xs
+                "
+            >
+                <Image
+                    src="/sheet.svg"
+                    alt="Sheets Icon"
+                    width={18}
+                    height={18}
+                />
+                <span className="text-xs text-gray-400">Sheet</span>
+            </button>
+
+            <button
+                className="
+                    flex
+                    items-center
+                    gap-2
+                    px-4
+                    py-2
+                    rounded-full
+                    hover:bg-gray-200
+                    transition-colors
+                    text-[#3995FF]                   
+                     text-xs
+                "
+            >
+                <Image
+                    src="/askai.svg"    
+                    alt="askai"
+                    width={16}
+                    height={16}
+                    className="text-gray-700"
+                />
+
+                <span className="text-xs">Ask AI</span>
+            </button>
+        </div>
+    );
 }
