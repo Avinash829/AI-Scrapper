@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
+
 import { useCallback } from 'react';
 import ReactFlow, {
-    Background,
     Node,
     Edge,
     Connection,
@@ -13,126 +14,113 @@ import ReactFlow, {
     EdgeProps,
     MarkerType,
 } from 'reactflow';
+import {
+  Background,
+} from '@xyflow/react';
 import 'reactflow/dist/style.css';
-import { Plus } from 'lucide-react';
-import CustomNode from './CustomNode';
 
-const nodeTypes = { custom: CustomNode };
+// Import your 4 custom node components
+import TriggerNode from './TriggerNode';
+import AssignUserNode from './AssignUserNode';
+import { BackgroundVariant } from '@xyflow/react';
+import { AddStepNode, ExitNode } from './CustomNode';
 
-function CustomEdge({ id, source, target, sourceX, sourceY, targetX, targetY, markerEnd }: EdgeProps) {
-    const [edgePath, labelX, labelY] = getStraightPath({
+// Register all node types
+const nodeTypes = {
+    trigger: TriggerNode,
+    assignUser: AssignUserNode,
+    addStep: AddStepNode,
+    exit: ExitNode,
+};
+
+function CustomEdge({ id, sourceX, sourceY, targetX, targetY, markerEnd }: EdgeProps) {
+    const [edgePath] = getStraightPath({
         sourceX,
         sourceY,
         targetX,
         targetY,
     });
 
-    const handleAddNode = (e: React.MouseEvent) => {
-        e.stopPropagation();
-        console.log('Add node between:', id);
-    };
-
-    const showAddButton = id === 'edge-2-3'; 
-
-   return (
-    <>
+    return (
         <path
             id={id}
-            className="react-flow__edge-path stroke-gray-300"
+            className="react-flow__edge-path"
             d={edgePath}
             fill="none"
-            strokeWidth={1.5}
-            markerEnd={markerEnd}
+            stroke="#E5E7EB"   /* subtle gray */
+            strokeWidth={1.25}
+            markerEnd={markerEnd}   /* <-- keep arrowheads */
         />
-        {showAddButton && (
-            <g transform={`translate(${labelX}, ${labelY})`}>
-                <foreignObject width={120} height={45} x={-60} y={-22}>
-                    <div className="flex items-center justify-center w-full h-full">
-                        <button
-                            onClick={handleAddNode}
-                            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-200 rounded-full shadow-sm hover:bg-gray-50 transition-all"
-                        >
-                            {/* <Plus size={14} strokeWidth={2} className="text-gray-700" /> */}
-                            <span className="leading-none">Add Step</span>
-                        </button>
-                    </div>
-                </foreignObject>
-            </g>
-        )}
-    </>
-);
-
+    );
 }
+
 
 const edgeTypes = { custom: CustomEdge };
 
-// ✅ Nodes - matching Figma color scheme
+// ---------- Nodes ----------
 const initialNodes: Node[] = [
     {
-        id: 'node-1',
-        type: 'custom',
-        position: { x: 400, y: 50 },
-        data: {
-            label: 'Trigger',
-            subtitle: 'Manual',
-            color: '#22c55e', // soft green
-            type: 'trigger',
-        },
+        id: 'trigger',
+        type: 'trigger',
+        position: { x: 460, y: 10 },
+        data: {},
     },
     {
-        id: 'node-2',
-        type: 'custom',
-        position: { x: 400, y: 230 },
-        data: {
-            label: 'Assign User',
-            subtitle: 'Assign Avinash → Lead Owner',
-            color: '#3b82f6', // soft blue
-            type: 'action',
-        },
+        id: 'assignUser',
+        type: 'assignUser',
+        position: { x: 460, y: 170 },
+        data: {},
     },
     {
-        id: 'node-3',
-        type: 'custom',
-        position: { x: 400, y: 420 },
-        data: {
-            label: 'Exit',
-            subtitle: 'Workflow ends here',
-            color: '#ef4444', // soft red
-            type: 'exit',
-        },
+        id: 'addStep',
+        type: 'addStep',
+        position: { x: 595, y: 340 },
+        data: {},
+    },
+    {
+        id: 'exit',
+        type: 'exit',
+        position: { x: 632, y: 430 },
+        data: {},
     },
 ];
 
-// ✅ Edges - soft gray with arrow
 const initialEdges: Edge[] = [
     {
         id: 'edge-1-2',
-        source: 'node-1',
-        target: 'node-2',
+        source: 'trigger',
+        target: 'assignUser',
         type: 'custom',
         markerEnd: {
-            type: MarkerType.ArrowClosed,
-            color: '#9ca3af',
-            width: 16,
-            height: 16,
+        type: MarkerType.Arrow,
         },
+        label: 'default arrow',
     },
     {
         id: 'edge-2-3',
-        source: 'node-2',
-        target: 'node-3',
+        source: 'assignUser',
+        target: 'addStep',
         type: 'custom',
         markerEnd: {
-            type: MarkerType.ArrowClosed,
-            color: '#9ca3af',
-            width: 16,
-            height: 16,
+        type: MarkerType.Arrow,
         },
+        label: 'default arrow',
+    },
+    {
+        id: 'edge-3-4',
+        source: 'addStep',
+        target: 'exit',
+        type: 'custom',
+        markerEnd: {
+        type: MarkerType.Arrow,
+        },
+        label: 'default arrow',
     },
 ];
 
+
 interface WorkflowCanvasProps {
-    onNodeSelect: (node: Node | null) => void;
+    onNodeSelect?: (node: Node | null) => void;
 }
 
 export default function WorkflowCanvas({ onNodeSelect }: WorkflowCanvasProps) {
@@ -145,14 +133,20 @@ export default function WorkflowCanvas({ onNodeSelect }: WorkflowCanvasProps) {
     );
 
     const onNodeClick = useCallback(
-        (_event: React.MouseEvent, node: Node) => onNodeSelect(node),
+        (_event: React.MouseEvent, node: Node) => onNodeSelect?.(node),
         [onNodeSelect]
     );
 
-    const onPaneClick = useCallback(() => onNodeSelect(null), [onNodeSelect]);
+    const onPaneClick = useCallback(() => onNodeSelect?.(null), [onNodeSelect]);
 
     return (
-        <div className="flex-1 bg-gray-50 relative">
+        <div
+            className="flex-1 bg-[#fafafa] relative"
+            style={{
+                fontFamily:
+                    'Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto',
+            }}
+        >
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
@@ -167,8 +161,10 @@ export default function WorkflowCanvas({ onNodeSelect }: WorkflowCanvasProps) {
                 minZoom={0.8}
                 maxZoom={1.2}
             >
-                <Background color="black" gap={16} />
-            </ReactFlow>
+                <Background />
+
+        </ReactFlow>
+
         </div>
     );
 }

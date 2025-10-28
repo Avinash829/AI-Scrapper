@@ -18,6 +18,7 @@ import '@xyflow/react/dist/style.css';
 export default function Page() {
     const [activeTab, setActiveTab] = useState('home');
     const [selectedNode, setSelectedNode] = useState<Node | null>(null);
+        const [selectedProject, setSelectedProject] = useState<string | null>(null); 
 
     return (
         <ReactFlowProvider>
@@ -38,8 +39,7 @@ export default function Page() {
 
                 {/* Main Content */}
                 <div className="flex-1 flex flex-col overflow-hidden relative">
-                    <Header activeTab={activeTab} />
-
+                     <Header activeTab={activeTab} selectedProject={selectedProject} />
                     <div className="flex-1 flex overflow-hidden mt-4">
                         {activeTab === 'home' ? (
                             <>
@@ -48,8 +48,10 @@ export default function Page() {
                                 <BottomToolbar />
                             </>
                         ) : activeTab === 'projects' ? (
-                            <Projects />
-                        ) : activeTab === 'notifications' ? (
+                            <Projects
+                                selectedProject={selectedProject}
+                                setSelectedProject={setSelectedProject}
+                            />                        ) : activeTab === 'notifications' ? (
                             <Notifications />
                         ) : activeTab === 'mails' ? (
                             <Mails />

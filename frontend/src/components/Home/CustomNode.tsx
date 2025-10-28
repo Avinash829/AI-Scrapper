@@ -1,81 +1,28 @@
-'use client';
-import { Handle, Position } from 'reactflow';
-import { Zap, Users, MessageSquare, XCircle } from 'lucide-react';
+"use client";
 
-interface CustomNodeProps {
-  data: {
-    label: string;
-    subtitle: string;
-    color: string;
-    type: string;
-  };
+import { Handle, Position } from "@xyflow/react";
+import { HiPlus } from "react-icons/hi";
+
+export function AddStepNode() {
+    return (
+        <div className="relative flex items-center gap-2 bg-white border border-gray-200 rounded-full shadow-sm px-5 py-2 cursor-pointer hover:shadow-md transition">
+            <HiPlus className="text-gray-900 text-xl" />
+            <span className="text-gray-900 font-semibold text-lg leading-none text-sm">
+                Add Step
+            </span>
+            <Handle type="target" position={Position.Top} className="!bg-transparent !border-none" />
+            <Handle type="source" position={Position.Bottom} className="!bg-transparent !border-none" />
+        </div>
+    );
 }
 
-export default function CustomNode({ data }: CustomNodeProps) {
-  const getIcon = () => {
-    switch (data.type) {
-      case 'trigger':
-        return <Zap size={20} />;
-      case 'action':
-        return data.label === 'Assign User' ? <Users size={20} /> : <MessageSquare size={20} />;
-      case 'exit':
-        return <XCircle size={20} />;
-      default:
-        return null;
-    }
-  };
-
-  const getColorClasses = () => {
-    const colors: Record<string, { bg: string; border: string; icon: string; hover: string }> = {
-      green: {
-        bg: 'bg-green-50',
-        border: 'border-green-200',
-        icon: 'text-green-600',
-        hover: 'hover:bg-green-100',
-      },
-      blue: {
-        bg: 'bg-blue-50',
-        border: 'border-blue-200',
-        icon: 'text-blue-600',
-        hover: 'hover:bg-blue-100',
-      },
-      purple: {
-        bg: 'bg-purple-50',
-        border: 'border-purple-200',
-        icon: 'text-purple-600',
-        hover: 'hover:bg-purple-100',
-      },
-      red: {
-        bg: 'bg-red-50',
-        border: 'border-red-200',
-        icon: 'text-red-600',
-        hover: 'hover:bg-red-100',
-      },
-    };
-    return colors[data.color] || colors.blue;
-  };
-
-  const colorClasses = getColorClasses();
-
-  return (
-    <div
-      className={`px-5 py-4 shadow-lg rounded-xl border-2 ${colorClasses.bg} ${colorClasses.border} ${colorClasses.hover} transition-all cursor-pointer min-w-[280px]`}
-    >
-      {data.type !== 'trigger' && (
-        <Handle type="target" position={Position.Top} className="w-3 h-3 bg-gray-400" />
-      )}
-
-      <div className="flex items-start gap-3">
-        <div className={`${colorClasses.icon} mt-0.5`}>{getIcon()}</div>
-        <div className="flex-1">
-          <div className="font-semibold text-gray-900">{data.label}</div>
-          <div className="text-sm text-gray-600 mt-1">{data.subtitle}</div>
+export function ExitNode() {
+    return (
+        <div className="relative flex items-center justify-center bg-white border border-gray-200 rounded-full shadow-sm px-3 py-1.5">
+            <span className="text-gray-400 font-medium text-base leading-none">
+                Exit
+            </span>
+            <Handle type="target" position={Position.Top} className="!bg-transparent !border-none" />
         </div>
-      </div>
-
-      {data.type !== 'exit' && (
-        <Handle type="source" position={Position.Bottom} className="w-3 h-3 bg-gray-400" />
-      )}
-    </div>
-  );
+    );
 }

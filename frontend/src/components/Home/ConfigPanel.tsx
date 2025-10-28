@@ -4,6 +4,8 @@ import { useState, useRef, useEffect } from 'react';
 import { FaLinkedin, FaTwitter, FaFacebook, FaInstagram, FaGithub } from 'react-icons/fa';
 import { FiChevronDown, FiCopy } from 'react-icons/fi';
 import Image from 'next/image';
+import { HiOutlinePencil } from "react-icons/hi";
+import { SparklesIcon } from "@heroicons/react/24/outline";
 
 export default function ConfigPanel() {
     const [showDescription, setShowDescription] = useState(false);
@@ -31,41 +33,62 @@ export default function ConfigPanel() {
     }, []);
 
     return (
-        <div className="w-90 border border-gray-200 flex flex-col h-[82vh] rounded-4xl bg-white shadow-sm mr-6 mt-2 scrollbar-hide">
+        <div className="w-85 border border-gray-200 flex flex-col h-[82vh] rounded-4xl bg-white shadow-sm mr-6 mt-2 scrollbar-hide">
             
-            <div className="p-6 border-b border-gray-200 flex items-center gap-3">
+            <div className="p-6 flex items-center gap-3">
                             <Image
-                                src="/ai-scrapper-logo.png"
+                                src="/logo.png"
                                 alt="AI Scrapper Logo"
-                                width={36}
-                                height={36}
-                                className="rounded-lg"
+                                width={32}
+                                height={32}
+                                className="rounded-md"
                             />
                             <h2 className="text-lg font-semibold text-gray-900">Chat Response</h2>
                         </div>
 
+            {/* <div className='w-full bg-black'></div> */}
+
             {/* Content */}
             <div className="p-6 flex-1 overflow-y-auto space-y-4 scrollbar-hide">
                 {/* Prompt */}
-                <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Prompt</label>
-                    <textarea
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none bg-gray-200"
-                        rows={4}
-                        placeholder="Enter your prompt here..."
-                        defaultValue="Scrape profile data from LinkedIn"
-                    />
+                <div className="relative mb-6">
+                    {/* Header with Pen Icon */}
+                    <div className="flex items-center justify-between mb-2">
+                        <label className="text-sm font-medium text-gray-900">
+                            Prompts
+                        </label>
+                        <Image
+                            src="/prompt_pen.svg"
+                            alt="Edit"
+                            width={16}
+                            height={16}
+                            className="text-gray-700 hover:text-black cursor-pointer"
+                        />
+                    </div>
+
+
+                    <div className="relative">
+                        <textarea
+                            className="w-full bg-gray-100 rounded-xl px-4 py-3 pr-10 text-gray-700 text-xs resize-none"
+                            rows={3}
+                            placeholder="Enter your prompt here..."
+                        />
+
+
+                        {/* AI Sparkles Icon (bottom-right) */}
+                        <SparklesIcon className="absolute right-3 bottom-3 w-5 h-5 text-blue-500 pointer-events-none" />
+                    </div>
                 </div>
 
                 {/* Platform with React Icons */}
                 <div ref={dropdownRef}>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Platform</label>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Platforms</label>
                     <div className="relative">
                         <button
                             onClick={() => setOpen(!open)}
-                            className="w-full flex items-center justify-between px-4 py-3 border border-gray-300 rounded-lg bg-gray-200 hover:bg-gray-300 transition-all focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            className="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-gray-100"
                         >
-                            <div className="flex items-center gap-2 text-gray-700">
+                            <div className="flex items-center gap-2 text-gray-500 text-sm">
                                 {platforms.find((p) => p.name === selected)?.icon}
                                 <span>{selected}</span>
                             </div>
@@ -104,8 +127,8 @@ export default function ConfigPanel() {
                     <label className="block text-sm font-medium text-gray-700 mb-2">Tags</label>
                     <input
                         type="text"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all bg-gray-200"
-                        placeholder="Add tags..."
+                        className="w-full px-4 py-3 rounded-lg bg-gray-100 text-xs "
+                        placeholder="Click to add a tag..."
                     />
                 </div>
 
@@ -125,7 +148,7 @@ export default function ConfigPanel() {
                     </button>
                     {showDescription && (
                         <textarea
-                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none bg-gray-200"
+                            className="w-full px-4 py-3 rounded-lg bg-gray-100 text-sm"
                             rows={3}
                             placeholder="Add description..."
                         />
@@ -135,8 +158,8 @@ export default function ConfigPanel() {
 
             {/* Start Button */}
             <div className="p-6 shrink-0">
-                <button className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition-all shadow-sm">
-                    <FiCopy size={18} className="text-white" />
+                <button className="w-full flex items-center justify-center gap-2 bg-indigo-400 hover:bg-blue-700 text-gray-200 font-medium py-2 rounded-lg transition-all shadow-sm text-sm">
+                    <FiCopy size={16} className="text-white" />
                     <span>Start Scraping</span>
                 </button>
             </div>
