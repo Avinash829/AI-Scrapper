@@ -50,7 +50,7 @@ export default function BottomToolbar() {
                 "
             >
                 <Workflow size={18} />
-                <span className="text-xs text-gray-700">Workflow</span>
+                <span className="text-xs text-gray-900">Workflow</span>
             </button>
 
             <button
