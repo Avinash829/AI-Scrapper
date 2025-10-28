@@ -19,9 +19,9 @@ export default function Notifications() {
           <Bell size={20} />
           Notifications
         </h2>
-        <button className="text-sm text-blue-600 hover:underline">
+        {/* <button className="text-sm text-blue-600 hover:underline">
           Mark all as read
-        </button>
+        </button> */}
       </div>
 
       {/* Notifications List */}
