@@ -37,7 +37,7 @@ export default function ConfigPanel() {
             
             <div className="p-6 flex items-center gap-3">
                             <Image
-                                src="/logo.png"
+                                src="/logo.svg"
                                 alt="AI Scrapper Logo"
                                 width={32}
                                 height={32}
