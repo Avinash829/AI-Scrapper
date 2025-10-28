@@ -1,11 +1,9 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { FaLinkedin, FaTwitter, FaFacebook, FaInstagram, FaGithub } from 'react-icons/fa';
+import { FaTwitter, FaFacebook, FaInstagram, FaGithub } from 'react-icons/fa';
 import { FiChevronDown, FiCopy } from 'react-icons/fi';
 import Image from 'next/image';
-import { HiOutlinePencil } from "react-icons/hi";
-import { SparklesIcon } from "@heroicons/react/24/outline";
 
 export default function ConfigPanel() {
     const [showDescription, setShowDescription] = useState(false);
@@ -44,7 +42,7 @@ export default function ConfigPanel() {
     }, []);
 
     return (
-        <div className="w-85 border border-gray-200 flex flex-col h-[82vh] rounded-4xl bg-white shadow-sm mr-6 mt-2 scrollbar-hide">
+        <div className="w-[327px] border border-gray-200 flex flex-col h-[82vh] rounded-4xl bg-white shadow-sm mr-6 mt-2 scrollbar-hide">
             
             <div className="p-6 flex items-center gap-3">
                             <Image
@@ -57,7 +55,7 @@ export default function ConfigPanel() {
                             <h2 className="text-lg font-semibold text-gray-900">Chat Response</h2>
                         </div>
 
-            {/* <div className='w-full bg-black'></div> */}
+            <div className="border-t border-gray-100 w-full" />
 
             {/* Content */}
             <div className="p-6 flex-1 overflow-y-auto space-y-4 scrollbar-hide">
@@ -98,6 +96,9 @@ export default function ConfigPanel() {
 
                     </div>
                 </div>
+
+                                <div className="border-t border-gray-100 w-full" />
+
 
                 {/* Platform with React Icons */}
                 <div ref={dropdownRef}>
@@ -141,6 +142,9 @@ export default function ConfigPanel() {
                     </div>
                 </div>
 
+                                <div className="border-t border-gray-100 w-full" />
+
+
                 {/* Tags */}
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Tags</label>
@@ -150,6 +154,8 @@ export default function ConfigPanel() {
                         placeholder="Click to add a tag..."
                     />
                 </div>
+                                {/* <div className="border-t border-gray-200 w-full" /> */}
+
 
                 {/* Description */}
                 <div>
@@ -173,7 +179,11 @@ export default function ConfigPanel() {
                         />
                     )}
                 </div>
+                                <div className="border-t border-gray-100 w-full" />
+
             </div>
+
+            
 
             {/* Start Button */}
             <div className="p-6 shrink-0">

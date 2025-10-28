@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 'use client';
-import { Workflow, Sparkles } from 'lucide-react';
+import { Workflow } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 

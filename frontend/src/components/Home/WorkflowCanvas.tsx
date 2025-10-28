@@ -104,7 +104,6 @@ interface WorkflowCanvasProps {
     onNodeSelect?: (node: Node | null) => void;
 }
 
-// --- Inner component that safely uses useReactFlow ---
 function CanvasContent({ onNodeSelect }: WorkflowCanvasProps) {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
@@ -189,7 +188,6 @@ export default function WorkflowCanvas(props: WorkflowCanvasProps) {
                     'Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto',
             }}
         >
-            {/* ✅ Provide context for React Flow */}
             <ReactFlowProvider>
                 <CanvasContent {...props} />
             </ReactFlowProvider>
